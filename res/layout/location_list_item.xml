@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="200dp"
+    android:padding="5dp" >
+    
+    <ImageView
+        android:id="@+id/location_list_image"
+        android:layout_width="150dp"
+        android:layout_height="200dp" />
+
+    <TextView
+        android:id="@+id/location_list_label"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_alignRight="@id/location_list_image"
+        android:layout_alignBottom="@id/location_list_image" />
+    
+</RelativeLayout>

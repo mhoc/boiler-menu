@@ -2,9 +2,12 @@
 <resources>
 
     <string name="app_name">Boiler Menu</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string-array name="location_list_printable">
+        <item>Earheart</item>
+        <item>Ford</item>
+        <item>Hillenbrand</item>
+        <item>Wiley</item>
+        <item>Windsor</item>
+    </string-array>
 
 </resources>
