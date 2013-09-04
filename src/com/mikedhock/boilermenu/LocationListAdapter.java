@@ -22,10 +22,12 @@ public class LocationListAdapter extends BaseAdapter {
 	};
 	
 	Context context;
+	int parentWidth;
 	String[] locationNames;
 	
-	public LocationListAdapter(Context context) {
+	public LocationListAdapter(Context context, int parentViewWidth) {
 		this.context = context;
+		this.parentWidth = parentViewWidth;
 		locationNames = context.getResources().getStringArray(R.array.location_list_printable);
 	}
 	
@@ -47,7 +49,9 @@ public class LocationListAdapter extends BaseAdapter {
 	@Override
 	public View getView(int pos, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View cell = inflater.inflate(R.layout.location_list_item, parent, false);
+		RelativeLayout cell = (RelativeLayout) inflater.inflate(R.layout.location_list_item, parent, false);
+		
+		cell.setLayoutParams(new RelativeLayout.LayoutParams(this.parentWidth / 3, this.parentWidth / 3));
 		
 		ImageView iv = (ImageView) cell.findViewById(R.id.location_list_image);
 		iv.setScaleType(ImageView.ScaleType.CENTER_CROP);

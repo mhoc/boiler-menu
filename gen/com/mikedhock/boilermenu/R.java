@@ -29,8 +29,9 @@ public final class R {
     }
     public static final class id {
         public static final int gridview_locationlist=0x7f080001;
-        public static final int location_list_image=0x7f080002;
-        public static final int location_list_label=0x7f080003;
+        public static final int location_list_image=0x7f080003;
+        public static final int location_list_item_layout=0x7f080002;
+        public static final int location_list_label=0x7f080004;
         public static final int main_content_frame=0x7f080000;
     }
     public static final class layout {

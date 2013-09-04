@@ -2,16 +2,20 @@ package com.mikedhock.boilermenu;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class FragLocationList extends Fragment implements OnItemClickListener {
 
+	int gridviewWidth = 720, gridviewHeight = 1280;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.frag_location_list, container, false);
@@ -21,17 +25,24 @@ public class FragLocationList extends Fragment implements OnItemClickListener {
 		super.onActivityCreated(savedInstanceState);
 		
 		// Create the grid view which will house the location images
-		GridView grid = (GridView) getActivity().findViewById(R.id.gridview_locationlist);
+		final GridView grid = (GridView) getActivity().findViewById(R.id.gridview_locationlist);
+		final RelativeLayout gridItem = (RelativeLayout) getActivity().findViewById(R.id.location_list_item_layout);
 		
-		DisplayMetrics metrics = new DisplayMetrics(); 
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		int screenW = metrics.widthPixels;
-		int screenH = metrics.heightPixels;
+		// Get the width of the gridview so we can adjust the size of the pictures. 
+		// This is different than the screen width bc we might want to expand to a tablet layout later.
+		grid.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
+			public void onGlobalLayout() {
+				gridviewWidth = grid.getWidth();
+				gridviewHeight = grid.getHeight();
+				
+				grid.setColumnWidth(gridviewWidth / 3);
+				LocationListAdapter adapter = new LocationListAdapter(getActivity(), gridviewWidth);
+				grid.setAdapter(adapter);
+				
+				grid.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+			}
+		});
 		
-		grid.setColumnWidth(screenW / 3);
-		
-		LocationListAdapter adapter = new LocationListAdapter(getActivity());
-		grid.setAdapter(adapter);
 		grid.setOnItemClickListener(this);
 	}
 	
