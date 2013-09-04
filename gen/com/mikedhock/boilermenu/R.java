@@ -28,16 +28,20 @@ public final class R {
         public static final int windsor_outside=0x7f020005;
     }
     public static final class id {
-        public static final int gridview_locationlist=0x7f080001;
-        public static final int location_list_image=0x7f080003;
-        public static final int location_list_item_layout=0x7f080002;
-        public static final int location_list_label=0x7f080004;
+        public static final int gridview_locationlist=0x7f080002;
+        public static final int location_list_image=0x7f080005;
+        public static final int location_list_item_layout=0x7f080004;
+        public static final int location_list_label=0x7f080006;
         public static final int main_content_frame=0x7f080000;
+        public static final int pager=0x7f080001;
+        public static final int section_label=0x7f080003;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int frag_location_list=0x7f030001;
-        public static final int location_list_item=0x7f030002;
+        public static final int activity_main_menu=0x7f030001;
+        public static final int frag_location_list=0x7f030002;
+        public static final int fragment_activity_main_menu_dummy=0x7f030003;
+        public static final int location_list_item=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
