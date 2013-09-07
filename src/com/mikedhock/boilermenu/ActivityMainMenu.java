@@ -3,6 +3,8 @@ package com.mikedhock.boilermenu;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 
 public class ActivityMainMenu extends Activity {
 
@@ -19,6 +21,15 @@ public class ActivityMainMenu extends Activity {
         manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();        
         
     }
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.main_menu, menu);
+		return true;
+	}
+    
+    
     
     
 

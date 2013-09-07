@@ -2,20 +2,30 @@
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/location_list_item_layout"
-    android:layout_width="150dp"
-    android:layout_height="200dp"
-    android:padding="5dp" >
+    android:layout_width="fill_parent"
+    android:layout_height="175dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="3dp"
+    android:paddingBottom="3dp" >
     
     <ImageView
-        android:id="@+id/location_list_image"
-        android:layout_width="150dp"
-        android:layout_height="200dp" />
-
+        android:id="@+id/location_list_item_image"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+    />
+    
     <TextView
-        android:id="@+id/location_list_label"
-        android:layout_width="80dp"
-        android:layout_height="20dp"
-        android:layout_alignRight="@id/location_list_image"
-        android:layout_alignBottom="@id/location_list_image" />
+        android:id="@+id/location_list_item_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:layout_alignRight="@id/location_list_item_image"
+        android:layout_alignBottom="@id/location_list_item_image" 
+        android:padding="5dp"
+        android:textSize="40dp" 
+        android:background="#50000000"
+        android:textColor="@color/yellow" 
+    />
     
 </RelativeLayout>

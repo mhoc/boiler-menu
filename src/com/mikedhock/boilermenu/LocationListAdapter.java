@@ -1,17 +1,19 @@
 package com.mikedhock.boilermenu;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class LocationListAdapter extends BaseAdapter {
+public class LocationListAdapter extends ArrayAdapter {
 
 	private static int[] filenames = {
 		R.drawable.earhart_outside,
@@ -23,44 +25,27 @@ public class LocationListAdapter extends BaseAdapter {
 	
 	Context context;
 	int parentWidth;
-	String[] locationNames;
+	String[] locationNames = null;
 	
-	public LocationListAdapter(Context context, int parentViewWidth) {
+	public LocationListAdapter(Context context, String[] locationNames) {
+		super(context, R.id.location_list_item_layout, locationNames);
+		this.locationNames = locationNames;
 		this.context = context;
-		this.parentWidth = parentViewWidth;
-		locationNames = context.getResources().getStringArray(R.array.location_list_printable);
-	}
-	
-	@Override
-	public int getCount() {
-		return locationNames.length;
-	}
-
-	@Override
-	public Object getItem(int i) {
-		return null;
-	}
-
-	@Override
-	public long getItemId(int i) {
-		return 0;
 	}
 
 	@Override
 	public View getView(int pos, View convertView, ViewGroup parent) {
 		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		RelativeLayout cell = (RelativeLayout) inflater.inflate(R.layout.location_list_item, parent, false);
+		View row = inflater.inflate(R.layout.location_list_item, parent, false);
 		
-		cell.setLayoutParams(new RelativeLayout.LayoutParams(this.parentWidth / 3, this.parentWidth / 3));
-		
-		ImageView iv = (ImageView) cell.findViewById(R.id.location_list_image);
+		ImageView iv = (ImageView) row.findViewById(R.id.location_list_item_image);
 		iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
 		iv.setImageResource(filenames[pos]);
 		
-		TextView tv = (TextView) cell.findViewById(R.id.location_list_label);
+		TextView tv = (TextView) row.findViewById(R.id.location_list_item_label);
 		tv.setText(locationNames[pos]);
 		
-		return cell;
+		return row;
 	}
 	
 	
