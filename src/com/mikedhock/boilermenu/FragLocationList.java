@@ -1,6 +1,9 @@
 package com.mikedhock.boilermenu;
 
+import com.mikedhock.boilermenu.widgets.LocationListAdapter;
+
 import android.app.Fragment;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,12 +26,13 @@ public class FragLocationList extends Fragment implements OnItemClickListener {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		
-		// Create the grid view which will house the location images
+		// Create the list view.
 		final ListView list = (ListView) getActivity().findViewById(R.id.listview_locationlist);
-		final RelativeLayout listItem = (RelativeLayout) getActivity().findViewById(R.id.location_list_item_layout);
 		
+		// Create the adapter which will fill the list view.
 		LocationListAdapter adapter = new LocationListAdapter(getActivity(), 
-				getActivity().getResources().getStringArray(R.array.location_list_printable));
+				getActivity().getResources().getStringArray(R.array.location_list_printable),
+				ActivityMainMenu.locationBitmaps);
 		list.setAdapter(adapter);
 		list.setOnItemClickListener(this);
 	}

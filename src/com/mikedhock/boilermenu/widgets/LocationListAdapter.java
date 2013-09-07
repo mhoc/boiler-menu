@@ -1,6 +1,12 @@
-package com.mikedhock.boilermenu;
+package com.mikedhock.boilermenu.widgets;
+
+import com.mikedhock.boilermenu.R;
+import com.mikedhock.boilermenu.R.drawable;
+import com.mikedhock.boilermenu.R.id;
+import com.mikedhock.boilermenu.R.layout;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,22 +20,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class LocationListAdapter extends ArrayAdapter {
-
-	private static int[] filenames = {
-		R.drawable.earhart_outside,
-		R.drawable.ford_outside,
-		R.drawable.hillenbrand_outside,
-		R.drawable.wiley_outside,
-		R.drawable.windsor_outside
-	};
 	
 	Context context;
-	int parentWidth;
 	String[] locationNames = null;
+	Bitmap[] bitmaps = null;
 	
-	public LocationListAdapter(Context context, String[] locationNames) {
+	public LocationListAdapter(Context context, String[] locationNames, Bitmap[] bitmaps) {
 		super(context, R.id.location_list_item_layout, locationNames);
 		this.locationNames = locationNames;
+		this.bitmaps = bitmaps;
 		this.context = context;
 	}
 
@@ -40,7 +39,7 @@ public class LocationListAdapter extends ArrayAdapter {
 		
 		ImageView iv = (ImageView) row.findViewById(R.id.location_list_item_image);
 		iv.setScaleType(ImageView.ScaleType.CENTER_CROP);
-		iv.setImageResource(filenames[pos]);
+		iv.setImageBitmap(bitmaps[pos]);
 		
 		TextView tv = (TextView) row.findViewById(R.id.location_list_item_label);
 		tv.setText(locationNames[pos]);
