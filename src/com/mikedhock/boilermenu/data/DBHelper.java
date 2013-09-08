@@ -1,9 +1,13 @@
 package com.mikedhock.boilermenu.data;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -27,7 +31,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	private static final String MEALS_NAME = "meals_name";
 	
 	public DBHelper(Context context, String name, CursorFactory factory, int version) {
-		super(context, name, factory, version);
+		super(context, DB_NAME, null, DB_VERSION);
 	}
 
 	@Override
@@ -48,16 +52,19 @@ public class DBHelper extends SQLiteOpenHelper {
 		// Import that data if we desire. Probably not necessary for this app.
 	}
 	
+	public void clear() {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_MEALS, null, null);
+	}
+	
 	public boolean addMeal(Meal m) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
 		
 		values.put(MEALS_NAME, m.getTitle());
-		values.put(MEALS_LOC, m.getLocation());
-		values.put(MEALS_TIME, m.getTime());
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		values.put(MEALS_DATE, sdf.format(m.getDate()));
+		values.put(MEALS_LOC, m.getLocationStr());
+		values.put(MEALS_TIME, m.getTimeStr());
+		values.put(MEALS_DATE, m.getDateStr());
 		
 		long rowid = db.insert(TABLE_MEALS, null, values);
 		if (rowid >= 0) {
@@ -65,6 +72,28 @@ public class DBHelper extends SQLiteOpenHelper {
 		} else {
 			return false;
 		}
+	}
+	
+	public List<Meal> getMeals(Date day, Meal.Time time, Meal.Location loc) {
+		SQLiteDatabase db = this.getReadableDatabase();
+		
+		Cursor query = db.query(TABLE_MEALS, 
+				null, 
+				MEALS_DATE + "=\'" + Meal.convertDate(day) + "\' and " + 
+				MEALS_LOC + "=\'" + Meal.convertLoc(loc) + "\' and " + 
+				MEALS_TIME + "=\'" + Meal.convertTime(time) + "\';", 
+				null, null, null, null);
+		
+		List<Meal> meals = new LinkedList<Meal>();
+		
+		if (query.moveToFirst()) {
+			do {
+				String n_title = query.getString(4);
+				meals.add(new Meal(n_title, loc, time, day));
+			} while (query.moveToNext());
+		}
+		
+		return meals;
 	}
 
 }
