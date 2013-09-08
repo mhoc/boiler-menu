@@ -72,7 +72,7 @@ public class Meal {
 	/** Converts a Date object to an appropriate string.
 	 *  This is done here so it is standardized across the whole app. */
 	public static String convertDate(Date date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 		return sdf.format(date);
 	}
 	

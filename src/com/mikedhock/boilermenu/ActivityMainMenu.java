@@ -1,5 +1,7 @@
 package com.mikedhock.boilermenu;
 
+import com.mikedhock.boilermenu.test.DBTest;
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.content.res.Resources;
@@ -43,7 +45,10 @@ public class ActivityMainMenu extends Activity {
         // We'll make the default fragment by-location, so set that up.
         FragLocationList byLocationListFrag = new FragLocationList();
         this.fragContext = FragmentContext.frag_location_list;
-        manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();        
+        manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();
+        
+        // Testing for DBHelper. To test, uncomment this and comment the above three lines.
+        //manager.beginTransaction().replace(R.id.main_content_frame, new DBTest()).commit();
         
     }
 
