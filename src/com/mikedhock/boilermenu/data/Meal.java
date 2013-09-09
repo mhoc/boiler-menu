@@ -2,6 +2,7 @@ package com.mikedhock.boilermenu.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class Meal {
 
@@ -32,8 +33,12 @@ public class Meal {
 	private Location loc;
 	private Time time;
 	
+	// The small "sub-resturant" the meal is served at.
+	// Just copy straight from the website. 
+	private String restaurant; 
+	
 	// Date the meal was served on.
-	private Date date;
+	private GregorianCalendar date;
 	
 	/** ===== STATIC METHODS ===== **/
 	
@@ -71,31 +76,32 @@ public class Meal {
 	
 	/** Converts a Date object to an appropriate string.
 	 *  This is done here so it is standardized across the whole app. */
-	public static String convertDate(Date date) {
+	public static String convertDate(GregorianCalendar date) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
 		return sdf.format(date);
 	}
 	
 	/** ===== OBJECT METHODS ===== **/
 	
-	/** Constructor */
-	public Meal(String title, Location location, Time time, Date date) {
+	/** @param date: A GregorianCalendar object of the date. Like new GregorianCalendar(2013,12,31);.
+	 * 	@param time: Enum taken from Meal.Time. Either breakfast, lunch, or dinner.
+	 * 	@param location: Enum taken from Meal.Locations. Earhart, Ford, etc.
+	 * 	@param restaurant: The name of the "sub-restuarnat" in the food court. Like Granite Grill, etc.
+	 * 	@param title: The title of the meal. "Hamburgers", etc. */
+	public Meal(GregorianCalendar date, Time time, Location location, String restaurant, String title) {
 		this.title = title;
 		this.loc = location;
 		this.time = time;
 		this.date = date;
+		this.restaurant = restaurant;
 	}
 
-	public String getTitle() {
-		return title;
+	public GregorianCalendar getDateDate() {
+		return date;
 	}
 	
-	public Location getLocationEnum() {
-		return loc;
-	}
-	
-	public String getLocationStr() {
-		return convertLoc(loc);
+	public String getDateStr() {
+		return convertDate(this.date);
 	}
 	
 	public Time getTimeEnum() {
@@ -106,11 +112,20 @@ public class Meal {
 		return convertTime(time);
 	}
 	
-	public Date getDateDate() {
-		return date;
+	public Location getLocationEnum() {
+		return loc;
 	}
 	
-	public String getDateStr() {
-		return convertDate(this.date);
+	public String getLocationStr() {
+		return convertLoc(loc);
 	}
+	
+	public String getRestaurantStr() {
+		return this.restaurant;
+	}
+	
+	public String getTitle() {
+		return title;
+	}
+	
 }

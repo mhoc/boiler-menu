@@ -6,24 +6,33 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
+import java.util.GregorianCalendar;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 public class WebSource {
 
 	Context context;
-	String address;
+	public String address, webpage;
 	
-	public WebSource(Context context, Date date, Meal.Location loc) {
+	public WebSource(Context context, GregorianCalendar date, Meal.Location loc) {
 		this.context = context;
+		
 		address = constructWebAddress(date, loc);
+		Log.d("boilermenu.test.WebSource", "Downloading: " + address);
+		
 		DownloadSource task = new DownloadSource();
 		task.execute(address);
 	}
 	
-	private String constructWebAddress(Date date, Meal.Location loc) {
+	private String constructWebAddress(GregorianCalendar date, Meal.Location loc) {
 		StringBuilder address = new StringBuilder("");
 		address.append("http://www.housing.purdue.edu/Menus/");
 		
@@ -45,15 +54,30 @@ public class WebSource {
 			break;
 		}
 		
-		address.append(date.getYear() + "/");
-		address.append(date.getMonth() + "/");
-		address.append(date.getDay() + "");
+		address.append(date.get(date.YEAR) + "/");
+		address.append(date.get(date.MONTH) + "/");
+		address.append(date.get(date.DAY_OF_MONTH) + "");
 		
 		return address.toString();
 	}
 	
 	private void parseSource(String s) {
+		Log.d("boilermenu.test.WebSource", "Download complete. Parsing now.");
 		
+		Document doc = Jsoup.parse(s);
+		Element breakfast = doc.getElementById("Breakfast");
+		for (Element e : breakfast.getElementsByTag("li")) {
+			if (e.toString().contains("list-divider")) {
+				Log.d("boilermenu.test.WebSource", "Restaurant: " + e.text());
+				String rest = e.text();
+				
+				
+			} else if (e.toString().contains("<li>")){
+				Log.d("boilermenu.test.WebSource", "Menu Item: " + e.text());
+			}
+			
+		}
+		//
 		
 		
 		//addToDatabase(m);

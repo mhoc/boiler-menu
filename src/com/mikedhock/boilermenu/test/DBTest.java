@@ -1,6 +1,7 @@
 package com.mikedhock.boilermenu.test;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.mikedhock.boilermenu.data.DBHelper;
@@ -22,13 +23,9 @@ public class DBTest extends Fragment {
 		db.clear();
 		
 		// Add some test data.
-		db.addMeal(new Meal("Hamburgers", Meal.Location.earhart, Meal.Time.lunch, new Date(2013, 8, 9)));
-		db.addMeal(new Meal("Salad", Meal.Location.earhart, Meal.Time.lunch, new Date(2013, 8, 9)));
-		db.addMeal(new Meal("Pizza", Meal.Location.earhart, Meal.Time.dinner, new Date(2013, 8, 9)));
-		db.addMeal(new Meal("Grilled Chicken", Meal.Location.ford, Meal.Time.lunch, new Date(2013, 8, 9)));
 		
 		// Query the database for the meals we added.
-		List<Meal> meals = db.getMeals(new Date(2013, 8, 9), Meal.Time.lunch, Meal.Location.earhart);
+		List<Meal> meals = db.getMeals(new GregorianCalendar(2013, 8, 9), Meal.Time.lunch, Meal.Location.earhart);
 		
 		// Print to the log
 		for (Meal m : meals) {

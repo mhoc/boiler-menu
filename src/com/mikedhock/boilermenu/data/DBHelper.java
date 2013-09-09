@@ -2,6 +2,7 @@ package com.mikedhock.boilermenu.data;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -26,8 +27,9 @@ public class DBHelper extends SQLiteOpenHelper {
 	// Column names
 	private static final String MEALS_ID = "_id";
 	private static final String MEALS_DATE = "meals_date";
-	private static final String MEALS_LOC = "meals_loc";
 	private static final String MEALS_TIME = "meals_time";
+	private static final String MEALS_LOC = "meals_loc";
+	private static final String MEALS_REST = "meals_rest";
 	private static final String MEALS_NAME = "meals_name";
 	
 	public DBHelper(Context context, String name, CursorFactory factory, int version) {
@@ -40,8 +42,9 @@ public class DBHelper extends SQLiteOpenHelper {
 				"CREATE TABLE " + TABLE_MEALS + "( " +
 				MEALS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
 				MEALS_DATE + " TEXT, " +
-				MEALS_LOC + " TEXT, " + 
 				MEALS_TIME + " TEXT, " + 
+				MEALS_LOC + " TEXT, " + 
+				MEALS_REST + " TEXT, " + 
 				MEALS_NAME + " TEXT" + ");";
 		db.execSQL(create_table_meals);
 	}
@@ -65,6 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		values.put(MEALS_LOC, m.getLocationStr());
 		values.put(MEALS_TIME, m.getTimeStr());
 		values.put(MEALS_DATE, m.getDateStr());
+		values.put(MEALS_REST, m.getRestaurantStr());
 		
 		long rowid = db.insert(TABLE_MEALS, null, values);
 		if (rowid >= 0) {
@@ -74,7 +78,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 	}
 	
-	public List<Meal> getMeals(Date day, Meal.Time time, Meal.Location loc) {
+	public List<Meal> getMeals(GregorianCalendar day, Meal.Time time, Meal.Location loc) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		
 		Cursor query = db.query(TABLE_MEALS, 
@@ -88,8 +92,9 @@ public class DBHelper extends SQLiteOpenHelper {
 		
 		if (query.moveToFirst()) {
 			do {
-				String n_title = query.getString(4);
-				meals.add(new Meal(n_title, loc, time, day));
+				String n_rest = query.getString(4);
+				String n_title = query.getString(5);
+				meals.add(new Meal(day, time, loc, n_rest, n_title));
 			} while (query.moveToNext());
 		}
 		

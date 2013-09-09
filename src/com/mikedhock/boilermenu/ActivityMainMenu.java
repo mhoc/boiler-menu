@@ -1,6 +1,6 @@
 package com.mikedhock.boilermenu;
 
-import com.mikedhock.boilermenu.test.DBTest;
+import com.mikedhock.boilermenu.test.*;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -43,12 +43,14 @@ public class ActivityMainMenu extends Activity {
         generateBitmaps();
         
         // We'll make the default fragment by-location, so set that up.
-        FragLocationList byLocationListFrag = new FragLocationList();
-        this.fragContext = FragmentContext.frag_location_list;
-        manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();
+        //FragLocationList byLocationListFrag = new FragLocationList();
+        //this.fragContext = FragmentContext.frag_location_list;
+        //manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();
         
-        // Testing for DBHelper. To test, uncomment this and comment the above three lines.
-        //manager.beginTransaction().replace(R.id.main_content_frame, new DBTest()).commit();
+        // Testing framework. Its pretty official.
+        // Comment out the test fragment you want to run, then comment the three lines above. 
+        // manager.beginTransaction().replace(R.id.main_content_frame, new DBTest()).commit();
+         manager.beginTransaction().replace(R.id.main_content_frame, new WebSourceTest()).commit();
         
     }
 
