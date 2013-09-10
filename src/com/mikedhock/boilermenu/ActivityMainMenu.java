@@ -67,7 +67,7 @@ public class ActivityMainMenu extends Activity {
 		switch (item.getItemId()) {
 		case R.id.menu_main_switch_views:
 			if (this.fragContext == FragmentContext.frag_location_list) {
-				FragMealList byMealListFrag = new FragMealList();
+				FragTimeList byMealListFrag = new FragTimeList();
 				this.fragContext = FragmentContext.frag_meal_list;
 				manager.beginTransaction().replace(R.id.main_content_frame, byMealListFrag).commit();
 			} else if (this.fragContext == FragmentContext.frag_meal_list) {
@@ -81,6 +81,9 @@ public class ActivityMainMenu extends Activity {
 		return true;
 	}
 	
+	/** Generates all the bitmaps which will be used in the app. 
+	 *  It is done here and stored as a static class variable in memory so that all the heavy lifting in
+	 *  the app is done while it is launching. */
 	private void generateBitmaps() {
 		Resources r = getResources();
 		

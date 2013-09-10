@@ -1,6 +1,6 @@
 package com.mikedhock.boilermenu;
 
-import com.mikedhock.boilermenu.widgets.LocationListAdapter;
+import com.mikedhock.boilermenu.widgets.LargeImageLabelAdapter;
 
 import android.app.Fragment;
 import android.graphics.Bitmap;
@@ -30,7 +30,7 @@ public class FragLocationList extends Fragment implements OnItemClickListener {
 		final ListView list = (ListView) getActivity().findViewById(R.id.listview_locationlist);
 		
 		// Create the adapter which will fill the list view.
-		LocationListAdapter adapter = new LocationListAdapter(getActivity(), 
+		LargeImageLabelAdapter adapter = new LargeImageLabelAdapter(getActivity(), 
 				getActivity().getResources().getStringArray(R.array.location_list_printable),
 				ActivityMainMenu.locationBitmaps);
 		list.setAdapter(adapter);

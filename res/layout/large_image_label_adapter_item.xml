@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/location_list_item_layout"
+    android:id="@+id/large_image_item_layout"
     android:layout_width="fill_parent"
     android:layout_height="175dp"
     android:paddingLeft="10dp"
@@ -10,18 +10,18 @@
     android:paddingBottom="3dp" >
     
     <ImageView
-        android:id="@+id/location_list_item_image"
+        android:id="@+id/large_image_item_image"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" 
     />
     
     <TextView
-        android:id="@+id/location_list_item_label"
+        android:id="@+id/large_image_item_label"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:layout_alignRight="@id/location_list_item_image"
-        android:layout_alignBottom="@id/location_list_item_image" 
+        android:layout_alignRight="@id/large_image_item_image"
+        android:layout_alignBottom="@id/large_image_item_image" 
         android:padding="5dp"
         android:textSize="40dp" 
         android:background="#50000000"
