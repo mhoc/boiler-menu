@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,19 +21,23 @@ import android.util.Log;
 public class WebSource {
 
 	Context context;
-	public String address, webpage;
+	GregorianCalendar date;
+	Meal.Location loc;
+	public String address;
 	
 	public WebSource(Context context, GregorianCalendar date, Meal.Location loc) {
 		this.context = context;
+		this.date = date;
+		this.loc = loc;
 		
-		address = constructWebAddress(date, loc);
-		Log.d("boilermenu.test.WebSource", "Downloading: " + address);
+		constructWebAddress();
+		Log.d("boilermenu.data.WebSource", "Downloading: " + address);
 		
 		DownloadSource task = new DownloadSource();
 		task.execute(address);
 	}
 	
-	private String constructWebAddress(GregorianCalendar date, Meal.Location loc) {
+	private void constructWebAddress() {
 		StringBuilder address = new StringBuilder("");
 		address.append("http://www.housing.purdue.edu/Menus/");
 		
@@ -58,29 +63,50 @@ public class WebSource {
 		address.append(date.get(date.MONTH) + "/");
 		address.append(date.get(date.DAY_OF_MONTH) + "");
 		
-		return address.toString();
+		this.address = address.toString();
 	}
 	
 	private void parseSource(String s) {
-		Log.d("boilermenu.test.WebSource", "Download complete. Parsing now.");
+		Log.d("boilermenu.data.WebSource", "Download complete. Parsing now.");
 		
 		Document doc = Jsoup.parse(s);
+		String restaurant = null;
+		
 		Element breakfast = doc.getElementById("Breakfast");
 		for (Element e : breakfast.getElementsByTag("li")) {
 			if (e.toString().contains("list-divider")) {
-				Log.d("boilermenu.test.WebSource", "Restaurant: " + e.text());
-				String rest = e.text();
-				
-				
+				Log.d("boilermenu.data.WebSource", "Restaurant: " + e.text());
+				restaurant = e.text();
 			} else if (e.toString().contains("<li>")){
-				Log.d("boilermenu.test.WebSource", "Menu Item: " + e.text());
+				Log.d("boilermenu.data.WebSource", "Menu Item: " + e.text());
+				Meal m = new Meal(date, Meal.Time.breakfast, loc, restaurant, e.text());
+				addToDatabase(m);
 			}
-			
 		}
-		//
 		
+		Element lunch = doc.getElementById("Lunch");
+		for (Element e : lunch.getElementsByTag("li")) {
+			if (e.toString().contains("list-divider")) {
+				Log.d("boilermenu.data.WebSource", "Restaurant: " + e.text());
+				restaurant = e.text();
+			} else if (e.toString().contains("<li>")){
+				Log.d("boilermenu.data.WebSource", "Menu Item: " + e.text());
+				Meal m = new Meal(date, Meal.Time.breakfast, loc, restaurant, e.text());
+				addToDatabase(m);
+			}
+		}
 		
-		//addToDatabase(m);
+		Element dinner = doc.getElementById("Dinner");
+		for (Element e : dinner.getElementsByTag("li")) {
+			if (e.toString().contains("list-divider")) {
+				Log.d("boilermenu.data.WebSource", "Restaurant: " + e.text());
+				restaurant = e.text();
+			} else if (e.toString().contains("<li>")){
+				Log.d("boilermenu.data.WebSource", "Menu Item: " + e.text());
+				Meal m = new Meal(date, Meal.Time.breakfast, loc, restaurant, e.text());
+				addToDatabase(m);
+			}
+		}
 	}
 	
 	private void addToDatabase(Meal m) {

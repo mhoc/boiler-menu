@@ -55,11 +55,24 @@ public class DBHelper extends SQLiteOpenHelper {
 		// Import that data if we desire. Probably not necessary for this app.
 	}
 	
-	public void clear() {
+	/** Destroys the t_meals table from the database and recreates an empty one.
+	 *  This is useful for both clearing out the database and when we need to add new columns. 
+	 *  This will return true if it successfully destroyed and recreated the table. 
+	 *  Otherwise, it will return false. */
+	public void recreate() {
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.delete(TABLE_MEALS, null, null);
+		Cursor c = db.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + TABLE_MEALS +"'", null);
+		
+		if (c.getCount() > 0) {
+			db.execSQL("DROP TABLE " + this.TABLE_MEALS);
+			onCreate(db);
+		} else {
+			onCreate(db);
+		}
+		
 	}
 	
+	/** Adds a meal to the database. Will return true if successful. */
 	public boolean addMeal(Meal m) {
 		SQLiteDatabase db = this.getWritableDatabase();
 		ContentValues values = new ContentValues();
@@ -78,6 +91,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		}
 	}
 	
+	/** Returns meals of a given day, time, and location. */
 	public List<Meal> getMeals(GregorianCalendar day, Meal.Time time, Meal.Location loc) {
 		SQLiteDatabase db = this.getReadableDatabase();
 		
@@ -97,6 +111,9 @@ public class DBHelper extends SQLiteOpenHelper {
 				meals.add(new Meal(day, time, loc, n_rest, n_title));
 			} while (query.moveToNext());
 		}
+		
+		query.close();
+		db.close();
 		
 		return meals;
 	}

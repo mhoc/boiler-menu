@@ -43,21 +43,20 @@ public class ActivityMainMenu extends Activity {
         generateBitmaps();
         
         // We'll make the default fragment by-location, so set that up.
-        //FragLocationList byLocationListFrag = new FragLocationList();
-        //this.fragContext = FragmentContext.frag_location_list;
-        //manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();
+        FragLocationList byLocationListFrag = new FragLocationList();
+        this.fragContext = FragmentContext.frag_location_list;
+        manager.beginTransaction().replace(R.id.main_content_frame, byLocationListFrag).commit();
         
         // Testing framework. Its pretty official.
         // Comment out the test fragment you want to run, then comment the three lines above. 
         // manager.beginTransaction().replace(R.id.main_content_frame, new DBTest()).commit();
-         manager.beginTransaction().replace(R.id.main_content_frame, new WebSourceTest()).commit();
+        // manager.beginTransaction().replace(R.id.main_content_frame, new WebSourceTest()).commit();
         
     }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu bar located at the top of the screen.
-		
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.main_menu, menu);
 		return true;

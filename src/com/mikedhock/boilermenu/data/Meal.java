@@ -77,8 +77,13 @@ public class Meal {
 	/** Converts a Date object to an appropriate string.
 	 *  This is done here so it is standardized across the whole app. */
 	public static String convertDate(GregorianCalendar date) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yy-MM-dd");
-		return sdf.format(date);
+		StringBuilder s = new StringBuilder();
+		s.append(date.get(GregorianCalendar.YEAR));
+		s.append("-");
+		s.append(date.get(GregorianCalendar.MONTH));
+		s.append("-");
+		s.append(date.get(GregorianCalendar.DAY_OF_MONTH));
+		return s.toString();
 	}
 	
 	/** ===== OBJECT METHODS ===== **/
@@ -94,6 +99,12 @@ public class Meal {
 		this.time = time;
 		this.date = date;
 		this.restaurant = restaurant;
+	}
+	
+	public String toString() {
+		String s = getTimeStr() + " on " + getDateStr() + " at " + getLocationStr() + ", " + getRestaurantStr() + 
+				" consists of " + getTitle();
+		return s;
 	}
 
 	public GregorianCalendar getDateDate() {
