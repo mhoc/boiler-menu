@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.mikedhock.boilermenu.data.DBHelper;
 import com.mikedhock.boilermenu.data.Meal;
-import com.mikedhock.boilermenu.data.WebSource;
+import com.mikedhock.boilermenu.data.WebUpdater;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -25,7 +25,9 @@ public class WebSourceTest extends Fragment {
 		// test code is located inside the WebSource object. That way it is guaranteed to be called after
 		// the download is finished. We could implement a callback and stuff out here, but I don't think
 		// its worth it just for a small testing function.
-		WebSource ws = new WebSource(getActivity(), new GregorianCalendar(2013,9,9), Meal.Location.earhart);
+		WebUpdater wu = new WebUpdater(getActivity());
+		wu.update(new GregorianCalendar(2013,9,9), Meal.Location.earhart);
+		
 		
 		// If you want to test if WebSource works, copy the following code into the bottom of
 		// void parseSource(String s) inside WebSource.java.
