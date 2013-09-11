@@ -1,8 +1,11 @@
 package com.mikedhock.boilermenu;
 
+import com.mikedhock.boilermenu.data.Meal;
 import com.mikedhock.boilermenu.widgets.*;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +15,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 public class FragTimeList extends Fragment implements OnItemClickListener {
+	
+	String[] times = {"Breakfast", "Lunch", "Dinner"};
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.frag_meal_list, container, false);
@@ -24,7 +29,7 @@ public class FragTimeList extends Fragment implements OnItemClickListener {
 		final ListView list = (ListView) getActivity().findViewById(R.id.listview_meallist);
 		
 		LargeImageLabelAdapter adapter = new LargeImageLabelAdapter(getActivity(), 
-				new String[]{"Breakfast", "Lunch", "Dinner"},
+				times,
 				ActivityMainMenu.mealBitmaps);
 		
 		list.setAdapter(adapter);
@@ -32,8 +37,26 @@ public class FragTimeList extends Fragment implements OnItemClickListener {
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		switch (position) {
+		case 0:
+			ActivityMainMenu.timeSelected = Meal.Time.breakfast;
+			break;
+		case 1:
+			ActivityMainMenu.timeSelected = Meal.Time.lunch;
+			break;
+		case 2:
+			ActivityMainMenu.timeSelected = Meal.Time.dinner;
+			break;
+		}
 		
+		if (ActivityMainMenu.locationSelected == null) {
+			FragmentManager m = getActivity().getFragmentManager();
+			getActivity().getActionBar().setTitle(times[position]);
+			m.beginTransaction().replace(R.id.main_content_frame, new FragLocationList()).commit();
+		} else {
+			// Launch the new fragment
+		}
 	}
 
 }

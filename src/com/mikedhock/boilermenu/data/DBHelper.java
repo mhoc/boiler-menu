@@ -81,7 +81,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		values.put(MEALS_LOC, m.getLocationStr());
 		values.put(MEALS_TIME, m.getTimeStr());
 		values.put(MEALS_DATE, m.getDateStr());
-		values.put(MEALS_REST, m.getRestaurantStr());
+		values.put(MEALS_REST, m.getRestaurant());
 		
 		long rowid = db.insert(TABLE_MEALS, null, values);
 		if (rowid >= 0) {

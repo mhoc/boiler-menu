@@ -2,12 +2,5 @@
 <resources>
 
     <string name="app_name">Boiler Menu</string>
-    <string-array name="location_list_printable">
-        <item>Earheart</item>
-        <item>Ford</item>
-        <item>Hillenbrand</item>
-        <item>Wiley</item>
-        <item>Windsor</item>
-    </string-array>
 
 </resources>

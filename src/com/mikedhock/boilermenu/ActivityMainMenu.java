@@ -1,5 +1,6 @@
 package com.mikedhock.boilermenu;
 
+import com.mikedhock.boilermenu.data.Meal;
 import com.mikedhock.boilermenu.test.*;
 
 import android.app.Activity;
@@ -23,7 +24,13 @@ public class ActivityMainMenu extends Activity {
 		frag_meal_list
 	}
 	
-	// Fragment manager to handle all the fragmnent transactions.
+	// When the user makes choices in the menu structure, they will be stored here so 
+	// they can be accessed later when populating the menu list. I don't like this way of 
+	// doing it, but for now it will work.
+	public static Meal.Location locationSelected = null;
+	public static Meal.Time timeSelected = null;
+	
+	// Fragment manager to handle all the fragment transactions.
 	FragmentManager manager;
 	
 	// The bitmaps for all the menu items are pre-generated in onCreate.
@@ -98,7 +105,6 @@ public class ActivityMainMenu extends Activity {
 		mealBitmaps[0] = BitmapFactory.decodeResource(r, R.drawable.meal_breakfast);
 		mealBitmaps[1] = BitmapFactory.decodeResource(r, R.drawable.meal_lunch);
 		mealBitmaps[2] = BitmapFactory.decodeResource(r, R.drawable.meal_dinner);
-		
 	}
     
     

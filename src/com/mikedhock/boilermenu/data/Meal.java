@@ -33,7 +33,7 @@ public class Meal {
 	private Location loc;
 	private Time time;
 	
-	// The small "sub-resturant" the meal is served at.
+	// The small "sub-restaurant" the meal is served at.
 	// Just copy straight from the website. 
 	private String restaurant; 
 	
@@ -102,7 +102,7 @@ public class Meal {
 	}
 	
 	public String toString() {
-		String s = getTimeStr() + " on " + getDateStr() + " at " + getLocationStr() + ", " + getRestaurantStr() + 
+		String s = getTimeStr() + " on " + getDateStr() + " at " + getLocationStr() + ", " + getRestaurant() + 
 				" consists of " + getTitle();
 		return s;
 	}
@@ -131,7 +131,7 @@ public class Meal {
 		return convertLoc(loc);
 	}
 	
-	public String getRestaurantStr() {
+	public String getRestaurant() {
 		return this.restaurant;
 	}
 	
