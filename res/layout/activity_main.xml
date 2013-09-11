@@ -2,12 +2,22 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
     
-	<RelativeLayout
-        android:id="@+id/main_content_frame"
+	<fragment
+	    android:name="com.mikedhock.boilermenu.FragCheckPanel"
+	    android:id="@+id/main_fragment_checkpanel"
+	    android:layout_width="match_parent"
+	    android:layout_height="200dp"
+    />
+	
+	<fragment
+        android:name="com.mikedhock.boilermenu.FragResultsList"
+        android:id="@+id/main_fragment_results"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+		android:layout_height="200dp" 
+	/>
     
     
 </LinearLayout>
