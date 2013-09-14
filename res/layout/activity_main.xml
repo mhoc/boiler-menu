@@ -1,23 +1,40 @@
-<LinearLayout 
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
     
-	<fragment
-	    android:name="com.mikedhock.boilermenu.FragCheckPanel"
-	    android:id="@+id/main_fragment_checkpanel"
+    <RelativeLayout
+        android:id="@+id/main_checkpanel_collapsed"
+        android:layout_width = "match_parent"
+        android:layout_height = "50dp"
+        
+        android:layout_alignParentTop="true"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+    />
+    
+	<RelativeLayout
+	    android:id="@+id/main_checkpanel_expanded"
 	    android:layout_width="match_parent"
 	    android:layout_height="200dp"
+	    
+	    android:layout_alignParentTop="true"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
     />
 	
-	<fragment
-        android:name="com.mikedhock.boilermenu.FragResultsList"
-        android:id="@+id/main_fragment_results"
+	<RelativeLayout
+        android:id="@+id/main_results"
         android:layout_width="match_parent"
-		android:layout_height="200dp" 
+		android:layout_height="wrap_content"
+		
+		android:layout_below="@id/main_checkpanel_expanded"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+		
 	/>
     
     
-</LinearLayout>
+</RelativeLayout>
