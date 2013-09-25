@@ -1,30 +1,23 @@
 package com.mikedhock.boilermenu;
 
-import com.mikedhock.boilermenu.data.Meal;
+import com.mikedhock.boilermenu.data.*;
 import com.mikedhock.boilermenu.test.*;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.Toast;
 
 public class ActivityMainMenu extends Activity {
-
-	/** Fragments the Activity is managing */
-	FragCheckPanelExpand fragExpanded;
 	
 	/** Fragment manager to handle all the fragment transactions. */
 	FragmentManager manager;
+	
+	/** Information about which location/time the user has selected in the drop-down fragment. */
+	static Meal.Location lSelected;
+	static Meal.Time tSelected;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +27,7 @@ public class ActivityMainMenu extends Activity {
         manager = getFragmentManager();
         
         // Set the default fragment state
-        fragExpanded = new FragCheckPanelExpand();
-        manager.beginTransaction().replace(R.id.main_checkpanel_expanded, fragExpanded).commit();
+        manager.beginTransaction().replace(R.id.main_checkpanel_expanded, new FragCheckPanelExpand()).commit();
     }
 
 	public boolean onCreateOptionsMenu(Menu menu) {
