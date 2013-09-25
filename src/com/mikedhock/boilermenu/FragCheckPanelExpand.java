@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 
 public class FragCheckPanelExpand extends Fragment implements OnClickListener {
@@ -29,7 +31,7 @@ public class FragCheckPanelExpand extends Fragment implements OnClickListener {
 		case R.id.radio_submit_button:
 			// We animate the movement of the fragment transaction which takes place
 			FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
-			transaction.setCustomAnimations(android.R.anim.fade_in, R.anim.frag_collapse_up);
+			transaction.setCustomAnimations(android.R.animator.fade_in, R.anim.frag_slide_up);
 			transaction.detach(this);
 			transaction.replace(R.id.main_checkpanel_collapsed, new FragCheckPanelCollapse());
 			transaction.commit();
