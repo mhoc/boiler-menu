@@ -1,9 +1,12 @@
 package com.mikedhock.boilermenu;
 
+import java.util.GregorianCalendar;
+
 import com.mikedhock.boilermenu.data.*;
 import com.mikedhock.boilermenu.test.*;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,7 +18,11 @@ public class ActivityMainMenu extends Activity {
 	/** Fragment manager to handle all the fragment transactions. */
 	FragmentManager manager;
 	
+	/** Fragment objects to track what is currently being displayed on the screen. */
+	static Fragment checkboxF, resultsF;
+	
 	/** Information about which location/time the user has selected in the drop-down fragment. */
+	static GregorianCalendar dSelected;
 	static Meal.Location lSelected;
 	static Meal.Time tSelected;
 
@@ -26,9 +33,17 @@ public class ActivityMainMenu extends Activity {
         // Get the fragment manager which will be used to commit fragment transactions to the main view.
         manager = getFragmentManager();
         
+        // Create fragments to display on the UI.
+        checkboxF = new FragCheckPanelExpand();
+        resultsF = new FragResultsList();
+        
         // Set the default fragment state
-        manager.beginTransaction().replace(R.id.main_checkpanel_expanded, new FragCheckPanelExpand()).commit();
-        manager.beginTransaction().replace(R.id.main_results_expanded, new FragResultsList()).commit();
+        manager.beginTransaction().replace(R.id.main_checkpanel_expanded, checkboxF).commit();
+        manager.beginTransaction().replace(R.id.main_results, resultsF).commit();
+        
+        // Set a default date for now
+        dSelected = new GregorianCalendar();
+        dSelected.setTimeInMillis(System.currentTimeMillis());
     }
 
 	public boolean onCreateOptionsMenu(Menu menu) {

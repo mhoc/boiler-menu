@@ -1,5 +1,6 @@
 package com.mikedhock.boilermenu;
 
+import com.mikedhock.boilermenu.data.DBHelper;
 import com.mikedhock.boilermenu.data.Meal;
 
 import android.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.RadioGroup;
 
 public class FragCheckPanelExpand extends Fragment implements OnClickListener {
 
+	DBHelper db;
 	RadioGroup locations, times;
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +34,9 @@ public class FragCheckPanelExpand extends Fragment implements OnClickListener {
 		// Set up radios
 		locations = (RadioGroup) getActivity().findViewById(R.id.radio_location_group);
 		times = (RadioGroup) getActivity().findViewById(R.id.radio_time_group);
+		
+		// Set up database for future use.
+		db = new DBHelper(getActivity(), null, null, -1);
 	}
 
 	public void onClick(View view) {
@@ -72,13 +77,23 @@ public class FragCheckPanelExpand extends Fragment implements OnClickListener {
 				return;
 			}
 			
-			// Create the transaction which switches the two fragments in and out, with an animation.
-			// Then commit the transaction.
+			// Load the data the user requests from the database.
+			db.getMeals(ActivityMainMenu.dSelected, ActivityMainMenu.tSelected, ActivityMainMenu.lSelected);
+			
+			
+			// Create a fragment transaction which will collapse the check panel.
 			FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
+			// It will be animated. One is a simple fade_in animation, the other is a slide up animation defined in res/anim
 			transaction.setCustomAnimations(android.R.animator.fade_in, R.anim.frag_slide_up);
+			// Detach the current fragment from the UI. Pretty much necessary.
 			transaction.detach(this);
-			transaction.replace(R.id.main_checkpanel_collapsed, new FragCheckPanelCollapse());
+			// Replace the collapsed check panel with a new fragment.
+			ActivityMainMenu.checkboxF = new FragCheckPanelCollapse();
+			transaction.replace(R.id.main_checkpanel_collapsed, ActivityMainMenu.checkboxF);
+			// Commit the transaction.
 			transaction.commit();
+			
+			
 			break;
 		}
 		

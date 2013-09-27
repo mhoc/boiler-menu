@@ -30,10 +30,16 @@ public class FragCheckPanelCollapse extends Fragment implements OnClickListener 
 
 
 	public void onClick(View arg0) {
+		// Create a fragment transaction which will collapse the check panel.
 		FragmentTransaction transaction = this.getFragmentManager().beginTransaction();
+		// It will be animated. One is a simple fade_in animation, the other is a slide up animation defined in res/anim
 		transaction.setCustomAnimations(R.anim.frag_slide_down, android.R.animator.fade_out);
+		// Detach the current fragment from the UI. Pretty much necessary.
 		transaction.detach(this);
-		transaction.replace(R.id.main_checkpanel_expanded, new FragCheckPanelExpand());
+		// Replace the collapsed check panel with a new fragment.
+		ActivityMainMenu.checkboxF = new FragCheckPanelExpand();
+		transaction.replace(R.id.main_checkpanel_expanded, ActivityMainMenu.checkboxF);
+		// Commit the transaction.
 		transaction.commit();
 	}
 
