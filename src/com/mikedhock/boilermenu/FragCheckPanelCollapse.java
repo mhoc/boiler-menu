@@ -36,7 +36,5 @@ public class FragCheckPanelCollapse extends Fragment implements OnClickListener 
 		transaction.replace(R.id.main_checkpanel_expanded, new FragCheckPanelExpand());
 		transaction.commit();
 	}
-	
-	
 
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:background="#404040" >
+    android:background="@color/medium_grey_bg" >
     
     <TextView
         android:id = "@+id/checkpanel_collapsed_summary_tv"
@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:text="Lunch at Earhart, Today"
-        android:textColor="#F0F0F0"
+        android:textColor="@color/white_text"
         android:textSize="20dp" />
 
 </RelativeLayout>

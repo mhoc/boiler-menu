@@ -25,7 +25,19 @@
     />
 	
 	<RelativeLayout
-        android:id="@+id/main_results"
+        android:id="@+id/main_results_collapsed"
+        android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		
+		android:layout_below="@id/main_checkpanel_collapsed"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+	    android:layout_alignParentRight="true"
+		
+	/>
+	
+	<RelativeLayout
+        android:id="@+id/main_results_expanded"
         android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		

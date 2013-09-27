@@ -28,6 +28,7 @@ public class ActivityMainMenu extends Activity {
         
         // Set the default fragment state
         manager.beginTransaction().replace(R.id.main_checkpanel_expanded, new FragCheckPanelExpand()).commit();
+        manager.beginTransaction().replace(R.id.main_results_expanded, new FragResultsList()).commit();
     }
 
 	public boolean onCreateOptionsMenu(Menu menu) {

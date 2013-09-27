@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#404040" >
+    android:background="@color/medium_grey_bg" >
     
         <RadioGroup
             android:id="@+id/radio_location_group"
@@ -18,7 +18,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Earhart" 
-        		android:textColor="#F0F0F0"
+        		android:textColor="@color/white_text"
        		/>
             
             <RadioButton 
@@ -26,7 +26,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Ford"
-        		android:textColor="#F0F0F0"
+        		android:textColor="@color/white_text"
        		/>
             
             <RadioButton 
@@ -34,7 +34,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Hillenbrand"
-        		android:textColor="#F0F0F0"
+        		android:textColor="@color/white_text"
        		/>
             
             <RadioButton 
@@ -42,7 +42,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Wiley"
-        		android:textColor="#F0F0F0"
+        		android:textColor="@color/white_text"
        		/>
             
             <RadioButton 
@@ -50,7 +50,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Windsor"
-        		android:textColor="#F0F0F0" 
+        		android:textColor="@color/white_text" 
        		/>
             
         </RadioGroup>   
@@ -70,7 +70,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Breakfast"
-        		android:textColor="#F0F0F0"
+        		android:textColor="@color/white_text"
        		/>
             
             <RadioButton 
@@ -78,7 +78,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Lunch"
-        		android:textColor="#F0F0F0" 
+        		android:textColor="@color/white_text" 
        		/>
             
             <RadioButton 
@@ -86,7 +86,7 @@
        			android:layout_width="wrap_content"
         		android:layout_height="wrap_content"
         		android:text="Dinner"
-        		android:textColor="#F0F0F0" 
+        		android:textColor="@color/white_text" 
        		/>
             
        	</RadioGroup>
@@ -94,7 +94,7 @@
         <Button
             android:id = "@+id/radio_submit_button"
             android:text="Get Meals"
-            android:textColor="#F0F0F0"
+            android:textColor="@color/white_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
