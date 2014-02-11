@@ -1,5 +1,4 @@
 boiler-menu
 ===========
 
-An improved menu application for Purdue University's food courts. 
-(Will) Include support for browsing meals by location and by time (Breakfast, Lunch, Dinner), with an interface that is eay to use and compliant with the Android design guidelines. 
+This has totally be deprecated in favor of the much better Purdue-ACM-SIGAPP/Purdue-App! Go over there.
